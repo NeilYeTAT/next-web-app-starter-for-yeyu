@@ -1,14 +1,10 @@
 import { atom } from 'jotai'
-import { convertMaybeEvmError } from '../utils/wagmi'
 
 const lastErrorBaseAtom = atom<Error | null>(null)
 
 export const lastErrorAtom = atom(
   get => get(lastErrorBaseAtom),
   (_, set, error: Error | null) => {
-    if (error != null) {
-      error = convertMaybeEvmError(error)
-    }
     set(lastErrorBaseAtom, error)
   },
 )
